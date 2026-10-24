@@ -297,6 +297,7 @@ class ValidationReport(BaseModel):
     required_field_rate: float = Field(ge=0.0, le=1.0)
     timestamp_parse_rate: float = Field(ge=0.0, le=1.0)
     type_error_count: int = Field(ge=0)
+    parse_failure_count: int = Field(default=0, ge=0)
     errors: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
@@ -307,6 +308,10 @@ class ValidationReport(BaseModel):
         ):
             raise ValueError(
                 "sample_count cannot exceed available_sample_count"
+            )
+        if self.parse_failure_count > self.sample_count:
+            raise ValueError(
+                "parse_failure_count cannot exceed sample_count"
             )
         if self.accepted:
             if self.sample_count < 1:
@@ -331,6 +336,10 @@ class ValidationReport(BaseModel):
             if self.type_error_count != 0:
                 raise ValueError(
                     "accepted schema cannot have type errors"
+                )
+            if self.parse_failure_count >= self.sample_count:
+                raise ValueError(
+                    "accepted schema needs at least one parsed sample"
                 )
             if self.errors:
                 raise ValueError(

@@ -1,10 +1,20 @@
 """B2 — unknown-schema generation.
 
 Batch 1 provides the declarative schema model, structural signatures, the
-versioned registry, and signature-based reuse detection. Later batches add the
-Elasticsearch pipeline compiler, validator, agent-driven generator, and CLI.
+versioned registry, and signature-based reuse detection. Batch 2 adds the
+Elasticsearch pipeline compiler and validator. Later batches add the
+agent-driven generator and CLI.
 """
 
+from group_B.schema_generation.compile_es import (
+    ALLOWED_PROCESSORS,
+    FORBIDDEN_PROCESSORS,
+    PipelineCompileError,
+    PipelineLayout,
+    PipelineSafetyError,
+    build_pipeline_layout,
+    compile_pipeline,
+)
 from group_B.schema_generation.detect import DetectionResult, SchemaDetector
 from group_B.schema_generation.models import (
     CsvParser,
@@ -34,17 +44,30 @@ from group_B.schema_generation.signature import (
     SourceSignature,
     build_signature,
 )
+from group_B.schema_generation.validate import (
+    MAX_VALIDATION_SAMPLES,
+    sample_hashes,
+    simulate_pipeline,
+    validate_pipeline,
+    validate_pipeline_safety,
+)
 
 __all__ = [
+    "ALLOWED_PROCESSORS",
     "CsvParser",
     "DEFAULT_MAX_SAMPLE_LINES",
     "DetectionResult",
     "DissectParser",
+    "FORBIDDEN_PROCESSORS",
     "FieldSpec",
     "FieldType",
     "GrokParser",
     "JsonParser",
     "KvParser",
+    "MAX_VALIDATION_SAMPLES",
+    "PipelineCompileError",
+    "PipelineLayout",
+    "PipelineSafetyError",
     "Provenance",
     "RegexParser",
     "RegistryEntry",
@@ -58,6 +81,12 @@ __all__ = [
     "SourceSignature",
     "TimestampSpec",
     "ValidationReport",
+    "build_pipeline_layout",
     "build_signature",
+    "compile_pipeline",
     "default_registry_root",
+    "sample_hashes",
+    "simulate_pipeline",
+    "validate_pipeline",
+    "validate_pipeline_safety",
 ]
