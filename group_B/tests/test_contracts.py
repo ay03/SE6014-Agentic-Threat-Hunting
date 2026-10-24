@@ -163,6 +163,17 @@ def test_b1_adapter_coerces_dict() -> None:
     assert result.confidence == 0.98
 
 
+def test_b1_adapter_accepts_no_match_mapping() -> None:
+    result = B1Recognizer(
+        lambda lines: {"matched": False, "reason_code": "no_match"}
+    ).recognise(["unknown line"])
+
+    assert result.matched is False
+    assert result.reason_code == "no_match"
+    assert result.format_id is None
+    assert result.dataset is None
+
+
 def test_b1_adapter_passes_through_result() -> None:
     expected = RecogniseResult(
         matched=True,

@@ -21,6 +21,7 @@ from .models import RecogniseResult
 
 DEFAULT_ALLOWED_PREFIXES: tuple[str, ...] = (
     "group_B.b1",
+    "group_B.B1",
     "group_B.recognizer",
     "group_B.b1_recognizer",
 )
