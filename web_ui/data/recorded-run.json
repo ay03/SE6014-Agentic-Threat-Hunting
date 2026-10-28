@@ -1,0 +1,890 @@
+{
+  "schema": 1,
+  "mode": "recorded",
+  "duration": 128.475,
+  "provenance": {
+    "commit": "e2f249bc25f25a4172d96015850d19f0b170d1e0",
+    "c2_commit": "e2f249bc25f25a4172d96015850d19f0b170d1e0",
+    "recorded_at": "2026-10-26T14:19:05.946588+00:00",
+    "model": "deepseek-flash",
+    "fixture": "35-record synthetic SSH fixture"
+  },
+  "hypothesis": "An external IP brute-forced SSH on DEMO-SSH and then logged in successfully between 2026-10-25T00:00:00Z and 2026-10-25T01:00:00Z.",
+  "source": {
+    "name": "ssh-demo.log",
+    "format": "Linux authentication",
+    "records": 35,
+    "indexed": 35,
+    "pipeline": "linux-auth",
+    "parse_failures": 0,
+    "source_id": "b3-768c20e416c1e3de0de6ca31",
+    "replay_submitted": 0
+  },
+  "verdict": {
+    "label": "SUPPORTED",
+    "confidence": "high",
+    "review_required": true,
+    "reasons": [
+      "Every required technique has at least the minimum number of independent self-checked indicators."
+    ]
+  },
+  "verification": {
+    "claims": 4,
+    "verified": 4,
+    "replayed": 26,
+    "identical": 26,
+    "verdict": "Confirmed",
+    "flags": [
+      {
+        "code": "narrative_unsupported_entity",
+        "source": "C2 run note 1",
+        "entities": [
+          "AG-02"
+        ],
+        "claim_id": "",
+        "ref": "C2 run note 1",
+        "message": "C2 run note 1 mentions AG-02, which appear in no evidence"
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "C-001",
+      "text": "Source 203.0.113.99 produced 30 failed SSH logins",
+      "technique": "T1110",
+      "origin": "playbook",
+      "facts": {
+        "bucket_key": "203.0.113.99",
+        "count": "30"
+      },
+      "status": "verified",
+      "citations": [
+        "security-events-c2test-2026.10.26/d7714d41b5a3496f759f872aca8f04877257068c4db4611f489f8b87c7d8c1d2",
+        "security-events-c2test-2026.10.26/654a877dd9e249f94afe41548159fa5c648b62599c0b93bf1fe6f99edb43f4d9",
+        "security-events-c2test-2026.10.26/6fe8eb3895eb9539ab4e0632c81968da67151a9d3b24ca1a3c940a213e70af52",
+        "security-events-c2test-2026.10.26/25e4969b7453fdea26adf50641328d0ebcecc06bca95dace7c9e8999c19e4e1b",
+        "security-events-c2test-2026.10.26/304e048ac78e5b95b120b63a5ec76b8149a9841bd23d0b2e0f30a3bc5600ef99",
+        "security-events-c2test-2026.10.26/fca44ba7a585edcd1630df3259286b6a56e003c068a91325a5cb129344613ed4",
+        "security-events-c2test-2026.10.26/79806b236ad3b7f1a223187bbfdb4319139c3da322276fa74d7c88d7e53f8ca5",
+        "security-events-c2test-2026.10.26/49f097b4d3907bfd93b28c342e1901bb57fce5aca7812c81ccf7fe638292365a",
+        "security-events-c2test-2026.10.26/73877bade6c6120f87b5ff1ff3f3c3bf9b563b45d71472e1333c4fc486b13cc5",
+        "security-events-c2test-2026.10.26/fc6aecc254e59e1ba250d707a4dc121aa77cc5b900771a6cc6ce93d9df9ed56d",
+        "security-events-c2test-2026.10.26/9acdc04204a1a4cb56de2d6a2dcf92e0cc165c4e7b60622a73810289824ec828",
+        "security-events-c2test-2026.10.26/3269eae23b98b48bbd5c0ad2d3b5f8f757a20147b822c255b9335689b6ad0844",
+        "security-events-c2test-2026.10.26/a0a2ff61f5375c77f00fd6dbeead4867d76466cb32080f69ff7e13a3ebe3225b",
+        "security-events-c2test-2026.10.26/72b2550ceb5a17cea67ccc9e9fd6be70b18d3edba1fe398a2efd706f542b1cd6",
+        "security-events-c2test-2026.10.26/b6b2b8a595febcdfe73dc44d6c1625110f6305f06a3f20a8daffa1a716778d7d",
+        "security-events-c2test-2026.10.26/127b51784eff806267aac8f8150523a7cd3a36efc8d65489eb1bd1f05a9694f8",
+        "security-events-c2test-2026.10.26/42d1a34e4d2d22326033b99b05a79006ab2d96b46765f1f151c78787377051bb",
+        "security-events-c2test-2026.10.26/da85dcda991a8a4dd6e7fd649f8000d79260ae08d30a11b202f12e17e33ff69a",
+        "security-events-c2test-2026.10.26/ed135bfb6a2d5c34258bc2909ff2ecec97f56d26f4152e32faa176aeeb8690aa",
+        "security-events-c2test-2026.10.26/79f61922e7eb80504aec852e277c0fa6a1bdcfb7e6f070015460e390a7aba486",
+        "security-events-c2test-2026.10.26/0cf1512375a6223fb1a785d5f0158570fefbf1cb00525cc2624193976d760446",
+        "security-events-c2test-2026.10.26/0e996187897f11b0a8d66ba4b874929cff439cd6673d2788b83139c453821023",
+        "security-events-c2test-2026.10.26/a1c502efef655e02ef10faabcb716ccbb17b57ed22c2ed765e2eeb85ae28ef57",
+        "security-events-c2test-2026.10.26/a4ac2e0e6fa52582adad69d553ddcca45277908c09fad92185cc371a34f617cb",
+        "security-events-c2test-2026.10.26/1aae1a62e9292a7e0dbf907cb26b7aa1b66a018c0d7b1fb057ce96d92cc3ad28",
+        "security-events-c2test-2026.10.26/4892ab90e9f5190af69c0cef1c69880f4bb42b46818494f082ad1479fdeaf312",
+        "security-events-c2test-2026.10.26/3cdc53e2543283be99c0cf68b7750b1799acceb0af825baf9f7c4782d63a9518",
+        "security-events-c2test-2026.10.26/09c15296970988b69fb6b3a472595d78cf243918a7dc6fadf539c370fa825d78",
+        "security-events-c2test-2026.10.26/0741a38190a524f7ba974fdbe77f5451a7a3733598fcc9d2548006c5dea049f3",
+        "security-events-c2test-2026.10.26/6c3e6b3f35003a1d3b757c7c7abf479978daaddf9a98817bc17b9de8614c9623"
+      ],
+      "step": "T1110-a"
+    },
+    {
+      "id": "C-002",
+      "text": "Source 203.0.113.99 logged in successfully as demo on DEMO-SSH after its failed SSH logins began",
+      "technique": "T1078",
+      "origin": "playbook",
+      "facts": {
+        "source.ip": "203.0.113.99",
+        "user.name": "demo",
+        "host.name": "DEMO-SSH"
+      },
+      "status": "verified",
+      "citations": [
+        "security-events-c2test-2026.10.26/e8ff3838a95a7b72b6204c9ef80ac770594e12d72f59eb2e415cd574f4ace1f4"
+      ],
+      "step": "T1078-b-203.0.113.99"
+    },
+    {
+      "id": "C-003",
+      "text": "Successful authentication on DEMO-SSH from 203.0.113.99 as demo: ssh_login",
+      "technique": "T1078",
+      "origin": "llm",
+      "facts": {
+        "event.action": "ssh_login",
+        "user.name": "demo",
+        "host.name": "DEMO-SSH",
+        "source.ip": "203.0.113.99"
+      },
+      "status": "verified",
+      "citations": [
+        "security-events-c2test-2026.10.26/e8ff3838a95a7b72b6204c9ef80ac770594e12d72f59eb2e415cd574f4ace1f4"
+      ],
+      "step": "AG-01"
+    },
+    {
+      "id": "C-004",
+      "text": "Failed SSH login (failure) for demo from 203.0.113.99 on DEMO-SSH continues up to the successful login",
+      "technique": "T1110",
+      "origin": "llm",
+      "facts": {
+        "source.ip": "203.0.113.99",
+        "user.name": "demo",
+        "host.name": "DEMO-SSH",
+        "event.outcome": "failure"
+      },
+      "status": "verified",
+      "citations": [
+        "security-events-c2test-2026.10.26/d7714d41b5a3496f759f872aca8f04877257068c4db4611f489f8b87c7d8c1d2",
+        "security-events-c2test-2026.10.26/654a877dd9e249f94afe41548159fa5c648b62599c0b93bf1fe6f99edb43f4d9",
+        "security-events-c2test-2026.10.26/6fe8eb3895eb9539ab4e0632c81968da67151a9d3b24ca1a3c940a213e70af52",
+        "security-events-c2test-2026.10.26/25e4969b7453fdea26adf50641328d0ebcecc06bca95dace7c9e8999c19e4e1b",
+        "security-events-c2test-2026.10.26/304e048ac78e5b95b120b63a5ec76b8149a9841bd23d0b2e0f30a3bc5600ef99",
+        "security-events-c2test-2026.10.26/fca44ba7a585edcd1630df3259286b6a56e003c068a91325a5cb129344613ed4",
+        "security-events-c2test-2026.10.26/79806b236ad3b7f1a223187bbfdb4319139c3da322276fa74d7c88d7e53f8ca5",
+        "security-events-c2test-2026.10.26/49f097b4d3907bfd93b28c342e1901bb57fce5aca7812c81ccf7fe638292365a",
+        "security-events-c2test-2026.10.26/73877bade6c6120f87b5ff1ff3f3c3bf9b563b45d71472e1333c4fc486b13cc5",
+        "security-events-c2test-2026.10.26/fc6aecc254e59e1ba250d707a4dc121aa77cc5b900771a6cc6ce93d9df9ed56d",
+        "security-events-c2test-2026.10.26/9acdc04204a1a4cb56de2d6a2dcf92e0cc165c4e7b60622a73810289824ec828",
+        "security-events-c2test-2026.10.26/3269eae23b98b48bbd5c0ad2d3b5f8f757a20147b822c255b9335689b6ad0844",
+        "security-events-c2test-2026.10.26/a0a2ff61f5375c77f00fd6dbeead4867d76466cb32080f69ff7e13a3ebe3225b",
+        "security-events-c2test-2026.10.26/72b2550ceb5a17cea67ccc9e9fd6be70b18d3edba1fe398a2efd706f542b1cd6",
+        "security-events-c2test-2026.10.26/b6b2b8a595febcdfe73dc44d6c1625110f6305f06a3f20a8daffa1a716778d7d",
+        "security-events-c2test-2026.10.26/127b51784eff806267aac8f8150523a7cd3a36efc8d65489eb1bd1f05a9694f8",
+        "security-events-c2test-2026.10.26/42d1a34e4d2d22326033b99b05a79006ab2d96b46765f1f151c78787377051bb",
+        "security-events-c2test-2026.10.26/da85dcda991a8a4dd6e7fd649f8000d79260ae08d30a11b202f12e17e33ff69a",
+        "security-events-c2test-2026.10.26/ed135bfb6a2d5c34258bc2909ff2ecec97f56d26f4152e32faa176aeeb8690aa",
+        "security-events-c2test-2026.10.26/79f61922e7eb80504aec852e277c0fa6a1bdcfb7e6f070015460e390a7aba486",
+        "security-events-c2test-2026.10.26/0cf1512375a6223fb1a785d5f0158570fefbf1cb00525cc2624193976d760446",
+        "security-events-c2test-2026.10.26/0e996187897f11b0a8d66ba4b874929cff439cd6673d2788b83139c453821023",
+        "security-events-c2test-2026.10.26/a1c502efef655e02ef10faabcb716ccbb17b57ed22c2ed765e2eeb85ae28ef57",
+        "security-events-c2test-2026.10.26/a4ac2e0e6fa52582adad69d553ddcca45277908c09fad92185cc371a34f617cb",
+        "security-events-c2test-2026.10.26/1aae1a62e9292a7e0dbf907cb26b7aa1b66a018c0d7b1fb057ce96d92cc3ad28",
+        "security-events-c2test-2026.10.26/4892ab90e9f5190af69c0cef1c69880f4bb42b46818494f082ad1479fdeaf312",
+        "security-events-c2test-2026.10.26/3cdc53e2543283be99c0cf68b7750b1799acceb0af825baf9f7c4782d63a9518",
+        "security-events-c2test-2026.10.26/09c15296970988b69fb6b3a472595d78cf243918a7dc6fadf539c370fa825d78",
+        "security-events-c2test-2026.10.26/0741a38190a524f7ba974fdbe77f5451a7a3733598fcc9d2548006c5dea049f3",
+        "security-events-c2test-2026.10.26/6c3e6b3f35003a1d3b757c7c7abf479978daaddf9a98817bc17b9de8614c9623"
+      ],
+      "step": "AG-02"
+    }
+  ],
+  "citation_count": 31,
+  "citations": [
+    "security-events-c2test-2026.10.26/0741a38190a524f7ba974fdbe77f5451a7a3733598fcc9d2548006c5dea049f3",
+    "security-events-c2test-2026.10.26/09c15296970988b69fb6b3a472595d78cf243918a7dc6fadf539c370fa825d78",
+    "security-events-c2test-2026.10.26/0cf1512375a6223fb1a785d5f0158570fefbf1cb00525cc2624193976d760446",
+    "security-events-c2test-2026.10.26/0e996187897f11b0a8d66ba4b874929cff439cd6673d2788b83139c453821023",
+    "security-events-c2test-2026.10.26/127b51784eff806267aac8f8150523a7cd3a36efc8d65489eb1bd1f05a9694f8",
+    "security-events-c2test-2026.10.26/1aae1a62e9292a7e0dbf907cb26b7aa1b66a018c0d7b1fb057ce96d92cc3ad28",
+    "security-events-c2test-2026.10.26/25e4969b7453fdea26adf50641328d0ebcecc06bca95dace7c9e8999c19e4e1b",
+    "security-events-c2test-2026.10.26/304e048ac78e5b95b120b63a5ec76b8149a9841bd23d0b2e0f30a3bc5600ef99",
+    "security-events-c2test-2026.10.26/3269eae23b98b48bbd5c0ad2d3b5f8f757a20147b822c255b9335689b6ad0844",
+    "security-events-c2test-2026.10.26/3cdc53e2543283be99c0cf68b7750b1799acceb0af825baf9f7c4782d63a9518",
+    "security-events-c2test-2026.10.26/42d1a34e4d2d22326033b99b05a79006ab2d96b46765f1f151c78787377051bb",
+    "security-events-c2test-2026.10.26/4892ab90e9f5190af69c0cef1c69880f4bb42b46818494f082ad1479fdeaf312",
+    "security-events-c2test-2026.10.26/49f097b4d3907bfd93b28c342e1901bb57fce5aca7812c81ccf7fe638292365a",
+    "security-events-c2test-2026.10.26/654a877dd9e249f94afe41548159fa5c648b62599c0b93bf1fe6f99edb43f4d9",
+    "security-events-c2test-2026.10.26/6c3e6b3f35003a1d3b757c7c7abf479978daaddf9a98817bc17b9de8614c9623",
+    "security-events-c2test-2026.10.26/6fe8eb3895eb9539ab4e0632c81968da67151a9d3b24ca1a3c940a213e70af52",
+    "security-events-c2test-2026.10.26/72b2550ceb5a17cea67ccc9e9fd6be70b18d3edba1fe398a2efd706f542b1cd6",
+    "security-events-c2test-2026.10.26/73877bade6c6120f87b5ff1ff3f3c3bf9b563b45d71472e1333c4fc486b13cc5",
+    "security-events-c2test-2026.10.26/79806b236ad3b7f1a223187bbfdb4319139c3da322276fa74d7c88d7e53f8ca5",
+    "security-events-c2test-2026.10.26/79f61922e7eb80504aec852e277c0fa6a1bdcfb7e6f070015460e390a7aba486",
+    "security-events-c2test-2026.10.26/9acdc04204a1a4cb56de2d6a2dcf92e0cc165c4e7b60622a73810289824ec828",
+    "security-events-c2test-2026.10.26/a0a2ff61f5375c77f00fd6dbeead4867d76466cb32080f69ff7e13a3ebe3225b",
+    "security-events-c2test-2026.10.26/a1c502efef655e02ef10faabcb716ccbb17b57ed22c2ed765e2eeb85ae28ef57",
+    "security-events-c2test-2026.10.26/a4ac2e0e6fa52582adad69d553ddcca45277908c09fad92185cc371a34f617cb",
+    "security-events-c2test-2026.10.26/b6b2b8a595febcdfe73dc44d6c1625110f6305f06a3f20a8daffa1a716778d7d",
+    "security-events-c2test-2026.10.26/d7714d41b5a3496f759f872aca8f04877257068c4db4611f489f8b87c7d8c1d2",
+    "security-events-c2test-2026.10.26/da85dcda991a8a4dd6e7fd649f8000d79260ae08d30a11b202f12e17e33ff69a",
+    "security-events-c2test-2026.10.26/e8ff3838a95a7b72b6204c9ef80ac770594e12d72f59eb2e415cd574f4ace1f4",
+    "security-events-c2test-2026.10.26/ed135bfb6a2d5c34258bc2909ff2ecec97f56d26f4152e32faa176aeeb8690aa",
+    "security-events-c2test-2026.10.26/fc6aecc254e59e1ba250d707a4dc121aa77cc5b900771a6cc6ce93d9df9ed56d",
+    "security-events-c2test-2026.10.26/fca44ba7a585edcd1630df3259286b6a56e003c068a91325a5cb129344613ed4"
+  ],
+  "events": [
+    {
+      "position": 1,
+      "time": "00:10:00",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:00Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40000 ssh2"
+    },
+    {
+      "position": 2,
+      "time": "00:10:01",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:01Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40001 ssh2"
+    },
+    {
+      "position": 3,
+      "time": "00:10:02",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:02Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40002 ssh2"
+    },
+    {
+      "position": 4,
+      "time": "00:10:03",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:03Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40003 ssh2"
+    },
+    {
+      "position": 5,
+      "time": "00:10:04",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:04Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40004 ssh2"
+    },
+    {
+      "position": 6,
+      "time": "00:10:05",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:05Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40005 ssh2"
+    },
+    {
+      "position": 7,
+      "time": "00:10:06",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:06Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40006 ssh2"
+    },
+    {
+      "position": 8,
+      "time": "00:10:07",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:07Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40007 ssh2"
+    },
+    {
+      "position": 9,
+      "time": "00:10:08",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:08Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40008 ssh2"
+    },
+    {
+      "position": 10,
+      "time": "00:10:09",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:09Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40009 ssh2"
+    },
+    {
+      "position": 11,
+      "time": "00:10:10",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:10Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40010 ssh2"
+    },
+    {
+      "position": 12,
+      "time": "00:10:11",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:11Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40011 ssh2"
+    },
+    {
+      "position": 13,
+      "time": "00:10:12",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:12Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40012 ssh2"
+    },
+    {
+      "position": 14,
+      "time": "00:10:13",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:13Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40013 ssh2"
+    },
+    {
+      "position": 15,
+      "time": "00:10:14",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:14Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40014 ssh2"
+    },
+    {
+      "position": 16,
+      "time": "00:10:15",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:15Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40015 ssh2"
+    },
+    {
+      "position": 17,
+      "time": "00:10:16",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:16Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40016 ssh2"
+    },
+    {
+      "position": 18,
+      "time": "00:10:17",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:17Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40017 ssh2"
+    },
+    {
+      "position": 19,
+      "time": "00:10:18",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:18Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40018 ssh2"
+    },
+    {
+      "position": 20,
+      "time": "00:10:19",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:19Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40019 ssh2"
+    },
+    {
+      "position": 21,
+      "time": "00:10:20",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:20Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40020 ssh2"
+    },
+    {
+      "position": 22,
+      "time": "00:10:21",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:21Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40021 ssh2"
+    },
+    {
+      "position": 23,
+      "time": "00:10:22",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:22Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40022 ssh2"
+    },
+    {
+      "position": 24,
+      "time": "00:10:23",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:23Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40023 ssh2"
+    },
+    {
+      "position": 25,
+      "time": "00:10:24",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:24Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40024 ssh2"
+    },
+    {
+      "position": 26,
+      "time": "00:10:25",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:25Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40025 ssh2"
+    },
+    {
+      "position": 27,
+      "time": "00:10:26",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:26Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40026 ssh2"
+    },
+    {
+      "position": 28,
+      "time": "00:10:27",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:27Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40027 ssh2"
+    },
+    {
+      "position": 29,
+      "time": "00:10:28",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:28Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40028 ssh2"
+    },
+    {
+      "position": 30,
+      "time": "00:10:29",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:29Z DEMO-SSH sshd[123]: Failed password for demo from 203.0.113.99 port 40029 ssh2"
+    },
+    {
+      "position": 31,
+      "time": "00:11:00",
+      "host": "DEMO-SSH",
+      "ip": "203.0.113.99",
+      "outcome": "success",
+      "message": "2026-10-25T00:11:00Z DEMO-SSH sshd[123]: Accepted password for demo from 203.0.113.99 port 41000 ssh2"
+    },
+    {
+      "position": 32,
+      "time": "00:10:00",
+      "host": "BENIGN-SSH",
+      "ip": "198.51.100.20",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:00Z BENIGN-SSH sshd[456]: Failed password for demo from 198.51.100.20 port 42000 ssh2"
+    },
+    {
+      "position": 33,
+      "time": "00:10:01",
+      "host": "BENIGN-SSH",
+      "ip": "198.51.100.20",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:01Z BENIGN-SSH sshd[456]: Failed password for demo from 198.51.100.20 port 42001 ssh2"
+    },
+    {
+      "position": 34,
+      "time": "00:10:02",
+      "host": "BENIGN-SSH",
+      "ip": "198.51.100.20",
+      "outcome": "failure",
+      "message": "2026-10-25T00:10:02Z BENIGN-SSH sshd[456]: Failed password for demo from 198.51.100.20 port 42002 ssh2"
+    },
+    {
+      "position": 35,
+      "time": "00:11:00",
+      "host": "BENIGN-SSH",
+      "ip": "198.51.100.20",
+      "outcome": "success",
+      "message": "2026-10-25T00:11:00Z BENIGN-SSH sshd[456]: Accepted password for demo from 198.51.100.20 port 43000 ssh2"
+    }
+  ],
+  "trace": [
+    {
+      "seq": 1,
+      "server": "es",
+      "tool": "describe_data",
+      "call_id": "attack-0001",
+      "ok": true,
+      "total": 35,
+      "request_hash": "3da5dd12e6fa5730ba5dce7d56751b9812238d71bc7f12bc2add19da9d5e3ff9"
+    },
+    {
+      "seq": 2,
+      "server": "analytics",
+      "tool": "lookup_attack",
+      "call_id": "attack-an0001",
+      "ok": true,
+      "total": 1,
+      "request_hash": "9e951ff64d0bf170d65c249c6d1fa3220401711a95eb9b36536c60e0bec14ace"
+    },
+    {
+      "seq": 3,
+      "server": "analytics",
+      "tool": "lookup_attack",
+      "call_id": "attack-an0002",
+      "ok": true,
+      "total": 1,
+      "request_hash": "9ec81361250621332723ea8dcc57774e10bb97589dcac8e9e995c5ccc4fea640"
+    },
+    {
+      "seq": 4,
+      "server": "es",
+      "tool": "count",
+      "call_id": "attack-0002",
+      "ok": true,
+      "total": 31,
+      "request_hash": "42de196d9ce57ea24fd625fb7fad417ae00d2fcb4e6cb0dd20181479cc392353"
+    },
+    {
+      "seq": 5,
+      "server": "es",
+      "tool": "aggregate",
+      "call_id": "attack-0003",
+      "ok": true,
+      "total": 35,
+      "request_hash": "a9ee9019a5ef94681b1655e9f379019d04b6c16a0117e9580ac4628d25b20acd"
+    },
+    {
+      "seq": 6,
+      "server": "analytics",
+      "tool": "gap_check",
+      "call_id": "attack-an0003",
+      "ok": true,
+      "total": 35,
+      "request_hash": "1a34acfc5b5ea2cf09b09ccb729c4ff87601c15e2cee694aae04ad252085d7a0"
+    },
+    {
+      "seq": 7,
+      "server": "es",
+      "tool": "count",
+      "call_id": "attack-0004",
+      "ok": true,
+      "total": 35,
+      "request_hash": "114da3fa7999757efee8de318807682803313e18f953f403c7bd3215b5b2d360"
+    },
+    {
+      "seq": 8,
+      "server": "es",
+      "tool": "count",
+      "call_id": "attack-0005",
+      "ok": true,
+      "total": 35,
+      "request_hash": "53791da02d80b35037d79b10e35f42a7e9fa8983face87e91c4db3e5335b3518"
+    },
+    {
+      "seq": 9,
+      "server": "es",
+      "tool": "count",
+      "call_id": "attack-0006",
+      "ok": true,
+      "total": 35,
+      "request_hash": "0a06864a978b1a122959394377378a13275c9f145b3464e0cce72c94d305bf12"
+    },
+    {
+      "seq": 10,
+      "server": "es",
+      "tool": "count",
+      "call_id": "attack-0007",
+      "ok": true,
+      "total": 35,
+      "request_hash": "91187b295f13270973aa6186881f3897a871226f98d231ad1d13538ba85c759e"
+    },
+    {
+      "seq": 11,
+      "server": "es",
+      "tool": "aggregate",
+      "call_id": "attack-0008",
+      "ok": true,
+      "total": 30,
+      "request_hash": "27716358e6505ebc4b3903861a02d19df8cd80126573a98339cde7aa6511ad3a"
+    },
+    {
+      "seq": 12,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0009",
+      "ok": true,
+      "total": 30,
+      "request_hash": "94209cbc91bbef72071a24f237c6487532319e83ab6dbec5217359cff9265ed8"
+    },
+    {
+      "seq": 13,
+      "server": "es",
+      "tool": "aggregate",
+      "call_id": "attack-0010",
+      "ok": true,
+      "total": 30,
+      "request_hash": "27716358e6505ebc4b3903861a02d19df8cd80126573a98339cde7aa6511ad3a"
+    },
+    {
+      "seq": 14,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0011",
+      "ok": true,
+      "total": 30,
+      "request_hash": "51906b2ca5fb21f7d9bab1f7dd27988bc0cdb97a969bc5d8b3c7e1381b414323"
+    },
+    {
+      "seq": 15,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0012",
+      "ok": true,
+      "total": 1,
+      "request_hash": "55d06769db48e1ebe140ca9e7250163ef62d211dae8c729054280af8bd5b5843"
+    },
+    {
+      "seq": 16,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0013",
+      "ok": true,
+      "total": 0,
+      "request_hash": "0ceb5d78e159f3203e634e2c5953c3c25e3158fb6ae086fbbf0e731fbdc811c2"
+    },
+    {
+      "seq": 17,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0014",
+      "ok": true,
+      "total": 1,
+      "request_hash": "f754424e190ee5667758842244ad93606396141fdc8190dc31d42b3860ba6be8"
+    },
+    {
+      "seq": 18,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0015",
+      "ok": true,
+      "total": 30,
+      "request_hash": "0649e1bef84906de68d85cb92fca430c039efbe933bb15e3e209e423bc98a39d"
+    },
+    {
+      "seq": 19,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0016",
+      "ok": true,
+      "total": 30,
+      "request_hash": "7530411ff2c509d53445bf9d1f75797aa34cbca90c9bf433621035a3ea87d46b"
+    },
+    {
+      "seq": 20,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0017",
+      "ok": true,
+      "total": 0,
+      "request_hash": "308df4c2ddfcd7d18a71a5fcbb17fc744c2c8d47654cc25af190ad6bd2a38a5e"
+    },
+    {
+      "seq": 21,
+      "server": "es",
+      "tool": "aggregate",
+      "call_id": "attack-0018",
+      "ok": true,
+      "total": 33,
+      "request_hash": "c9181edda8ec3f3aecbbbb27357e8a44bb89cf976faafab859dc20f2d6106467"
+    },
+    {
+      "seq": 22,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0019",
+      "ok": true,
+      "total": 0,
+      "request_hash": "d4bad67b1ad701eb5510468d31a07a8ec4e966740187c88427fbd798fbaa2cb4"
+    },
+    {
+      "seq": 23,
+      "server": "es",
+      "tool": "aggregate",
+      "call_id": "attack-0020",
+      "ok": true,
+      "total": 2,
+      "request_hash": "61f45ebc3c704e1901fdbf10a65183cc1c6a69f9c993c760590df1086a56def7"
+    },
+    {
+      "seq": 24,
+      "server": "es",
+      "tool": "aggregate",
+      "call_id": "attack-0021",
+      "ok": true,
+      "total": 33,
+      "request_hash": "517ea8c39897b87d70abc0457bdbe6d4df9c8ebd709fc955213d7f375644e51f"
+    },
+    {
+      "seq": 25,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0022",
+      "ok": true,
+      "total": 1,
+      "request_hash": "8b473ff437c2d12da476a1a90b61926186e02a5f5ed171322361db563f0c598b"
+    },
+    {
+      "seq": 26,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0023",
+      "ok": true,
+      "total": 1,
+      "request_hash": "47e0637076d9354b8a7c98fda6be02cecf8d185264bc0830010fc1f2d1cab139"
+    },
+    {
+      "seq": 27,
+      "server": "es",
+      "tool": "search",
+      "call_id": "attack-0024",
+      "ok": true,
+      "total": 30,
+      "request_hash": "e1ffe58974b530b7ace3c8495e95a1d4d0bee2815540d84903080742d45d5977"
+    }
+  ],
+  "llm_calls": [
+    {
+      "seq": 1,
+      "role": "intake",
+      "ms": 1871,
+      "tokens_in": 677,
+      "tokens_out": 258
+    },
+    {
+      "seq": 2,
+      "role": "investigator",
+      "ms": 14948,
+      "tokens_in": 1781,
+      "tokens_out": 1500
+    },
+    {
+      "seq": 3,
+      "role": "investigator",
+      "ms": 27859,
+      "tokens_in": 1781,
+      "tokens_out": 2123
+    },
+    {
+      "seq": 4,
+      "role": "investigator",
+      "ms": 7752,
+      "tokens_in": 2208,
+      "tokens_out": 1247
+    },
+    {
+      "seq": 5,
+      "role": "skeptic",
+      "ms": 23209,
+      "tokens_in": 1689,
+      "tokens_out": 3827
+    },
+    {
+      "seq": 6,
+      "role": "responder",
+      "ms": 12835,
+      "tokens_in": 1346,
+      "tokens_out": 2131
+    }
+  ],
+  "phases": {
+    "start MCP servers": 0.71,
+    "planning": 2.1,
+    "playbooks": 0.15,
+    "injection sweep": 0.08,
+    "investigator": 35.68,
+    "self-check": 0.0,
+    "skeptic": 23.27,
+    "verdict": 0.0,
+    "action drafts": 12.92,
+    "candidate playbooks": 0.0,
+    "total": 75.17
+  },
+  "timeline": [
+    {
+      "stage": "source_files",
+      "start_seconds": 0.423352,
+      "status": "passed",
+      "end_seconds": 0.547768,
+      "duration_seconds": 0.124416
+    },
+    {
+      "stage": "certificates",
+      "start_seconds": 0.548024,
+      "status": "passed",
+      "end_seconds": 0.877852,
+      "duration_seconds": 0.329829
+    },
+    {
+      "stage": "start_es",
+      "start_seconds": 0.877893,
+      "status": "passed",
+      "end_seconds": 27.116899,
+      "duration_seconds": 26.239006
+    },
+    {
+      "stage": "credentials",
+      "start_seconds": 27.116946,
+      "status": "passed",
+      "end_seconds": 32.317878,
+      "duration_seconds": 5.200932
+    },
+    {
+      "stage": "c2_snapshot",
+      "start_seconds": 32.317909,
+      "status": "passed",
+      "end_seconds": 33.522019,
+      "duration_seconds": 1.20411
+    },
+    {
+      "stage": "start_logstash",
+      "start_seconds": 33.522046,
+      "status": "passed",
+      "end_seconds": 47.524088,
+      "duration_seconds": 14.002043
+    },
+    {
+      "stage": "ingest",
+      "start_seconds": 47.524113,
+      "status": "passed",
+      "end_seconds": 50.220586,
+      "duration_seconds": 2.696473
+    },
+    {
+      "stage": "start_a3",
+      "start_seconds": 47.524344,
+      "status": "passed",
+      "end_seconds": 47.625872,
+      "duration_seconds": 0.101528
+    },
+    {
+      "stage": "onboard",
+      "start_seconds": 47.628901,
+      "status": "passed",
+      "end_seconds": 50.150381,
+      "duration_seconds": 2.52148
+    },
+    {
+      "stage": "onboard",
+      "start_seconds": 50.150413,
+      "status": "passed",
+      "end_seconds": 50.183107,
+      "duration_seconds": 0.032694
+    },
+    {
+      "stage": "run_hunt:attack",
+      "start_seconds": 50.22061,
+      "status": "passed",
+      "end_seconds": 127.620277,
+      "duration_seconds": 77.399668
+    },
+    {
+      "stage": "verify_c3:attack",
+      "start_seconds": 125.954804,
+      "status": "passed",
+      "end_seconds": 127.620244,
+      "duration_seconds": 1.665439
+    },
+    {
+      "stage": "cleanup",
+      "start_seconds": 127.620418,
+      "status": "passed",
+      "end_seconds": 128.475112,
+      "duration_seconds": 0.854694
+    }
+  ],
+  "status": "passed",
+  "cleanup": "owned containers, network, data, credentials and certificates removed",
+  "id": "verified-e2f249b",
+  "label": "Verified SSH investigation"
+}

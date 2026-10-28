@@ -1,0 +1,25 @@
+/* TRACE / Brutal — scoped, portable design tokens */
+@font-face{font-family:TraceDisplay;src:url('/assets/fonts/display.ttf') format('truetype');font-display:swap;font-weight:900}
+@font-face{font-family:TraceBody;src:url('/assets/fonts/body.otf') format('opentype');font-display:swap;font-weight:100 900}
+@font-face{font-family:TraceMono;src:url('/assets/fonts/mono.otf') format('opentype');font-display:swap}
+:root{
+ --color-paper:oklch(95.8% .012 94);--color-surface:oklch(98% .009 94);--color-wash:oklch(91.8% .016 94);
+ --color-ink:oklch(18% .008 94);--color-muted:oklch(45% .014 94);--color-rule:oklch(75% .018 94);
+ --color-accent:oklch(90.5% .195 112);--color-focus:oklch(48% .13 125);--color-good:oklch(40% .09 145);
+ --color-bad:oklch(45% .16 27);--color-warning:oklch(46% .085 65);--color-overlay:oklch(18% .008 94 / .6);
+ --font-display:TraceDisplay,'Arial Narrow',sans-serif;--font-body:TraceBody,Arial,sans-serif;--font-mono:TraceMono,monospace;
+ --space-2xs:.25rem;--space-xs:.5rem;--space-sm:.75rem;--space-md:1rem;--space-lg:1.5rem;--space-xl:2rem;--space-2xl:3rem;--space-3xl:4rem;
+ --text-xs:.65rem;--text-sm:.8rem;--text-md:.95rem;--text-lg:1.2rem;--text-xl:1.8rem;--text-display:clamp(3rem,5.6vw,5.7rem);
+ --ease-out:cubic-bezier(.16,1,.3,1);--ease-in:cubic-bezier(.7,0,.84,0);--ease-in-out:cubic-bezier(.65,0,.35,1);
+ --dur-fast:100ms;--dur-short:180ms;--dur-long:280ms;--rule-thin:1px;--rule-bold:2px;--radius-none:0;
+}
+:root{--color-accent-ink:var(--color-ink)}
+/* Stage accents: dark ink for paper, pale surface for small highlights, light signal for the agent. */
+:root{
+ --color-stage-onboard-ink:oklch(40% .085 190);--color-stage-onboard-wash:oklch(94% .025 190);--color-stage-onboard-signal:oklch(80% .11 190);
+ --color-stage-plan-ink:oklch(44% .135 255);--color-stage-plan-wash:oklch(94% .025 255);--color-stage-plan-signal:oklch(80% .09 255);
+ --color-stage-investigate-ink:oklch(45% .15 28);--color-stage-investigate-wash:oklch(94% .025 28);--color-stage-investigate-signal:oklch(80% .1 28);
+ --color-stage-challenge-ink:oklch(43% .095 75);--color-stage-challenge-wash:oklch(94% .035 75);--color-stage-challenge-signal:oklch(82% .13 75);
+ --color-stage-verify-ink:oklch(40% .1 150);--color-stage-verify-wash:oklch(94% .025 150);--color-stage-verify-signal:oklch(80% .12 150);
+ --color-stage-ink:var(--color-stage-onboard-ink);--color-stage-wash:var(--color-stage-onboard-wash);--color-stage-signal:var(--color-stage-onboard-signal);
+}

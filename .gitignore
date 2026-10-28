@@ -9,3 +9,11 @@ __pycache__/
 
 # Local provider credentials
 dskey.txt
+
+# Local visual demo runs and browser captures
+demo_ui/runtime/
+
+# Web UI execution artifacts and local provider settings
+web_ui/runtime/
+web_ui/.env
+web_ui/provider.env
