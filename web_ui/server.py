@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 sys.path.insert(0, str(REPO))
 from web_ui.recording import read_json
+from web_ui.reports import collect, archive
 
 RUN_ID = re.compile(r'^[a-f0-9]{32}$')
 
@@ -74,6 +75,18 @@ class RunManager:
             state.update(status='failed', stage='failed', error='The local runner exited before finishing. Check its server log.')
         return state
 
+    def reports(self, identifier):
+        self.state(identifier)  # Validate the ID and require an existing owned runtime directory.
+        job = self.runtime / identifier
+        private = []
+        if self.provider_env and self.provider_env.is_file():
+            for line in self.provider_env.read_text().splitlines():
+                name, separator, value = line.partition('=')
+                if separator and name.strip() in {'LLM_API_KEY', 'ES_API_KEY'}:
+                    private.append(value.strip().strip("\"'"))
+        return collect(job / 'artifacts', run_id=identifier, mode='live', secrets=private,
+                       console=job / 'runner.log')
+
     def cancel(self, identifier):
         with self.lock:
             if identifier != self.active_id:
@@ -89,7 +102,7 @@ def make_server(manager, port=8767):
             # Deliberately omit request bodies, configuration, tokens and query strings.
             pass
 
-        def send(self, status, payload, content_type='application/json; charset=utf-8'):
+        def send(self, status, payload, content_type='application/json; charset=utf-8', *, policy=None):
             body = json.dumps(payload).encode() if not isinstance(payload, bytes) else payload
             self.send_response(status)
             self.send_header('Content-Type', content_type)
@@ -97,7 +110,7 @@ def make_server(manager, port=8767):
             self.send_header('Cache-Control', 'no-store')
             self.send_header('X-Content-Type-Options', 'nosniff')
             self.send_header('Referrer-Policy', 'no-referrer')
-            self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
+            self.send_header('Content-Security-Policy', policy or "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
             self.end_headers()
             self.wfile.write(body)
 
@@ -118,6 +131,29 @@ def make_server(manager, port=8767):
                                        'active_id': manager.active_id})
             if path == '/api/recording':
                 return self.send(200, read_json(ROOT / 'data/recorded-run.json', {}))
+            html_route = re.fullmatch(r'/api/(recording|runs/[a-f0-9]{32})/reports/(c3-html)/view', path)
+            if html_route:
+                try:
+                    bundle = read_json(ROOT / 'data/recorded-reports.json', {}) if html_route.group(1) == 'recording' else manager.reports(html_route.group(1).split('/')[1])
+                    file = next((f for f in bundle.get('files', []) if f['id'] == html_route.group(2) and f['kind'] == 'html'), None)
+                    if file is None:
+                        raise FileNotFoundError
+                    return self.send(200, file['content'].encode(), 'text/html; charset=utf-8',
+                        policy="default-src 'none'; style-src 'unsafe-inline'; img-src data:; sandbox; base-uri 'none'; form-action 'none'")
+                except FileNotFoundError:
+                    return self.send(404, {'error': 'Report not available.'})
+            if path in {'/api/recording/reports', '/api/recording/reports.zip'}:
+                bundle = read_json(ROOT / 'data/recorded-reports.json', {})
+                if not bundle:
+                    return self.send(404, {'error': 'Recorded reports are unavailable.'})
+                return self.send(200, archive(bundle), 'application/zip') if path.endswith('.zip') else self.send(200, bundle)
+            report_route = re.fullmatch(r'/api/runs/([a-f0-9]{32})/reports(\.zip)?', path)
+            if report_route:
+                try:
+                    bundle = manager.reports(report_route.group(1))
+                    return self.send(200, archive(bundle), 'application/zip') if report_route.group(2) else self.send(200, bundle)
+                except FileNotFoundError:
+                    return self.send(404, {'error': 'Run not found.'})
             if path.startswith('/api/runs/'):
                 try:
                     return self.send(200, manager.state(path.removeprefix('/api/runs/')))
@@ -125,7 +161,8 @@ def make_server(manager, port=8767):
                     return self.send(404, {'error': 'Run not found.'})
             static = {'/': 'index.html', '/index.html': 'index.html',
                        '/tokens.css': 'tokens.css',
-                      '/story.css': 'story.css', '/story.js': 'story.js'}
+                      '/story.css': 'story.css', '/story.js': 'story.js',
+                      '/reports.css': 'reports.css', '/reports.js': 'reports.js'}
             target = ROOT / static[path] if path in static else None
             if path.startswith('/assets/fonts/') and re.fullmatch(r'/assets/fonts/[A-Za-z0-9_.-]+', path):
                 target = ROOT / path.lstrip('/')

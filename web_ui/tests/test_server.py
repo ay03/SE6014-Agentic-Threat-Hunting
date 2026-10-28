@@ -1,4 +1,6 @@
 """Contract and privacy boundaries of the local presentation server."""
+import io
+import zipfile
 import http.client
 import json
 from pathlib import Path
@@ -107,6 +109,37 @@ class ServerTests(unittest.TestCase):
             self.manager.cancel(job['id'])
             process.send_signal.assert_called_once()
             self.assertEqual(self.manager.state(job['id'])['status'], 'running')
+
+
+    def test_recorded_full_reports_and_zip(self):
+        code, body = self.request('/api/recording/reports')
+        self.assertEqual(code, 200)
+        bundle = json.loads(body)
+        files = {f['id']: f for f in bundle['files']}
+        self.assertIn('c3-html', files)
+        self.assertIn('c2-result', files)
+        self.assertIn('log-model', files)
+        self.assertEqual(len(json.loads(files['c2-result']['content'])['claims']), 4)
+        self.assertEqual(len(files['log-model']['content'].splitlines()), 6)
+        code, body = self.request('/api/recording/reports.zip')
+        self.assertEqual(code, 200)
+        with zipfile.ZipFile(io.BytesIO(body)) as z:
+            self.assertIn('attack/c3/hunt_report_attack.html', z.namelist())
+            self.assertIn('attack/llm.jsonl', z.namelist())
+        self.assertEqual(self.request('/api/recording/reports/c3-html/view')[0], 200)
+        connection = http.client.HTTPConnection('127.0.0.1', self.server.server_port)
+        connection.request('GET', '/api/recording/reports/c3-html/view')
+        response = connection.getresponse()
+        policy = response.getheader('Content-Security-Policy')
+        self.assertIn("default-src 'none'", policy)
+        self.assertIn("style-src 'unsafe-inline'", policy)
+        self.assertIn('sandbox', policy)
+        response.read()
+        connection.close()
+        self.assertEqual(self.request('/api/recording/reports/unknown/view')[0], 404)
+        self.assertEqual(self.request('/api/runs/' + 'b'*32 + '/reports')[0], 404)
+        self.assertEqual(self.request('/api/runs/../reports')[0], 404)
+        self.assertEqual(self.request('/api/recording/reports', headers={'Host': 'foreign.test'})[0], 403)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 # TRACE web UI
 
-Visual SSH investigation with six stages: Onboard, Plan, Investigate, Challenge, Verify and Brief. Includes recorded playback, live execution, animated tool receipts and claim verification, stage colours, an evidence drawer and a downloadable brief.
+Visual SSH investigation with six stages: Onboard, Plan, Investigate, Challenge, Verify and Brief. Includes recorded playback, live execution, animated tool receipts and claim verification, stage colours, an evidence drawer and a full C2/C3 report library.
 
 ## Run recorded mode
 
@@ -18,6 +18,7 @@ Open **http://127.0.0.1:8767/**.
 - **Play case** replays the verified SSH investigation at 1×, 4× or 8× speed.
 - Select a stage to inspect it directly, or use Back / Next.
 - **Inspect evidence** opens claims, original event references, raw input, tool receipts and review notes.
+- **Reports & logs** opens the full C2/C3 reports and run logs. Download individual files or the complete ZIP; the text-brief export has been removed.
 - **Pause motion** stops the illustration. Reduced-motion preferences are respected.
 - **Run details** shows execution metadata.
 
@@ -102,3 +103,25 @@ group_B/.venv/bin/python -m web_ui.runner \
 The job directory must be new. This runs the real transport, indexing, rules hunt and independent verification. It does not certify a fresh live LLM result or replace the broader regression suite in `group_B/DEMO_RUNBOOK.md`.
 
 Fonts are self-hosted; licenses are in `assets/fonts/`.
+
+## Full reports and logs
+
+After updating, restart the Python UI server so it loads the new report routes. Open **Reports & logs** from the main screen or **Open full reports & logs** inside the evidence drawer.
+
+- **C2**: full investigation result, plan, phase timings, response draft and generated detection files. The reader provides collapsible report sections and the complete source.
+- **C3**: complete styled HTML report, Markdown and JSON versions, and the evidence bundle. HTML is sandboxed with scripts, forms and external requests blocked.
+- **Logs**: complete tool trace, model audit (including retained prompts/responses), Elasticsearch MCP audit, analytics audit, run summary and any retained wall timing / runner console. JSONL entries can be searched and expanded; pagination limits visible entries, not the downloadable log.
+
+**Download file** exports the selected full artifact. **Download all (.zip)** exports every currently available artifact plus an inventory. Both use the same credential-redacted contents shown in the reader. No text summary is substituted. Missing files are labelled “not produced”; running and failed investigations may have fewer artifacts. Refresh files to load newly written output. Runtime directories and arbitrary files are never exposed as a static directory.
+
+The reader retains the selected run ID when loading and downloading. New website runs remember their ID in local browser storage so their reports remain reachable after a page reload while the runtime artifacts exist. Recorded mode uses its own retained artifacts and never fills gaps in a live run with recorded results.
+
+Recorded artifacts are packaged in `data/recorded-reports.json` and `data/recorded-reports.zip`. They match the same successful fixed-window run as `data/recorded-run.json`; the bundle includes 18 retained files. Live artifacts are collected from that job’s `artifacts/` directory and its console log. Credentials are redacted by key, provider-key patterns and the server’s configured provider secret.
+
+Report endpoints:
+
+- `/api/recording/reports` and `/api/recording/reports.zip`
+- `/api/runs/<run-id>/reports` and `/api/runs/<run-id>/reports.zip`
+- `/api/recording/reports/c3-html/view` and `/api/runs/<run-id>/reports/c3-html/view`
+
+For a future GitHub Pages update, the hosting adapter must also map `reports.js`, `reports.css`, the recorded bundle/ZIP routes and the sandboxed C3 HTML route to these packaged static artifacts. Pulling the source branch alone does not update a separate `gh-pages` deployment. This change does not update any fork or Pages site.
